@@ -33,11 +33,11 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          REPO="Mrsp137/DownloadWithGithub"
+          REPO="PRO-pixel777/PRO1"
           MY_RUN_ID="${{ github.run_id }}"
           MY_RUN_NUMBER="${{ github.run_number }}"
           WORKFLOW_FILE="download.yml"
-          MAX_CONCURRENT=2
+          MAX_CONCURRENT=5
 
           echo "🔍 Run ID: $MY_RUN_ID | Run Number: $MY_RUN_NUMBER"
 
@@ -245,18 +245,18 @@ jobs:
 
       - name: ارسال لینک دانلود به کاربر
         run: |
-          DOWN="https://github.com/Mrsp137/DownloadWithGithub/archive/refs/heads/${{ env.BRANCH_NAME }}.zip"
+          DOWN="https://github.com/PRO-pixel777/PRO1/archive/refs/heads/${{ env.BRANCH_NAME }}.zip"
 
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d "chat_id=${TELEGRAM_CHAT_ID}" \
             --data-urlencode "text=🎉 کار تمام شد | کاربر: ${{ github.event.inputs.user_id }} | branch: ${{ env.BRANCH_NAME }}"
 
           MSG="${DOWN}
-
-رمز فایل‌ها را هنگام استخراج وارد کنید 🔐
-لینک دانلود شما بعد از ۲ ساعت منقضی خواهد شد 👽
-
-📢 کانال ما: @FreeV2rng"
+          
+          رمز فایل‌ها را هنگام استخراج وارد کنید 🔐
+          لینک دانلود شما بعد از ۲ ساعت منقضی خواهد شد 👽
+          
+          📢 کانال ما: @FreeV2rng"
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d "chat_id=${{ github.event.inputs.user_id }}" \
             --data-urlencode "text=${MSG}"
