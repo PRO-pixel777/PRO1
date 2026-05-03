@@ -97,7 +97,7 @@ jobs:
           [ -z "$ORIGINAL_NAME" ] && ORIGINAL_NAME="downloaded_file"
           echo "ORIGINAL_NAME=$ORIGINAL_NAME" >> $GITHUB_ENV
 
-          MAX_SIZE=$((1024 * 1024 * 1024))
+          MAX_SIZE=$((2048 * 1024 * 1024))
           TIMEOUT=1800
           DOWNLOAD_SUCCESS=false
 
@@ -254,7 +254,7 @@ jobs:
           MSG="${DOWN}
           
           رمز فایل‌ها را هنگام استخراج وارد کنید 🔐
-          لینک دانلود شما بعد از ۲ ساعت منقضی خواهد شد 👽
+          لینک دانلود شما بعد از 6 ساعت منقضی خواهد شد 👽
           
           📢 کانال ما: @FreeV2rng"
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
