@@ -25,46 +25,6 @@ env:
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
 jobs:
-
-  wait-for-queue:
-    runs-on: ubuntu-latest
-    steps:
-      - name: بررسی صف و انتظار
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          REPO="PRO-pixel777/PRO1"
-          MY_RUN_ID="${{ github.run_id }}"
-          MY_RUN_NUMBER="${{ github.run_number }}"
-          WORKFLOW_FILE="download.yml"
-          MAX_CONCURRENT=5
-
-          echo "🔍 Run ID: $MY_RUN_ID | Run Number: $MY_RUN_NUMBER"
-
-          POSITION=0
-          while true; do
-            ACTIVE=$(curl -s \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              "https://api.github.com/repos/${REPO}/actions/runs?workflow_id=${WORKFLOW_FILE}&status=in_progress&per_page=100" \
-              | jq "[.workflow_runs[] | select(.id != ($MY_RUN_ID | tonumber) and .run_number < ($MY_RUN_NUMBER | tonumber))] | length")
-
-            if [ "$ACTIVE" -lt "$MAX_CONCURRENT" ]; then
-              echo "✅ جای خالی در صف وجود دارد. شروع پردازش..."
-              break
-            fi
-
-            if [ "$POSITION" -eq 0 ]; then
-              curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-                -d "chat_id=${{ github.event.inputs.user_id }}" \
-                --data-urlencode "text=⏳ درخواست شما در صف قرار گرفت. لطفاً صبر کنید..."
-              POSITION=1
-            fi
-
-            echo "⏳ تعداد runهای فعال: $ACTIVE — انتظار ۳۰ ثانیه..."
-            sleep 30
-          done
-
   process:
     runs-on: ubuntu-latest
     steps:
