@@ -66,7 +66,6 @@ jobs:
           done
 
   process:
-    needs: wait-for-queue
     runs-on: ubuntu-latest
     steps:
 
