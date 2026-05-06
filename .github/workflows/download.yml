@@ -57,7 +57,7 @@ jobs:
           echo "ORIGINAL_NAME=$ORIGINAL_NAME" >> $GITHUB_ENV
 
           MAX_SIZE=$((2048 * 1024 * 1024))
-          TIMEOUT=1800
+          TIMEOUT=3600
           DOWNLOAD_SUCCESS=false
 
           for attempt in 1 2; do
