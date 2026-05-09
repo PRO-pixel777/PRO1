@@ -56,7 +56,7 @@ jobs:
           [ -z "$ORIGINAL_NAME" ] && ORIGINAL_NAME="downloaded_file"
           echo "ORIGINAL_NAME=$ORIGINAL_NAME" >> $GITHUB_ENV
 
-          MAX_SIZE=$((2048 * 1024 * 1024))
+          MAX_SIZE=$((2148 * 1024 * 1024))
           TIMEOUT=3600
           DOWNLOAD_SUCCESS=false
 
